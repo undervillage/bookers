@@ -19,10 +19,24 @@
           <td><%= @book.body %></td>
           <% if @book.user.id == current_user.id %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
-            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
+            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'コメントを削除しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% end %>
         </tr>
       </table>
+
+      <h3>コメント</h3>
+      <td>コメント数 : <span id="book_comments_count"><%= @book.book_comments.count %></span></td>
+      <table class="table" id="comment_list">
+        <%= render 'book_comments/comments', book_comments: @book_comments %>
+      </table>
+  
+      <div class="row">
+        <%= form_with(model: [@book, @book_comment], local: false, class: "col-md-12") do |f| %>
+          <%= f.text_area :content, class: "col-md-12", id: "book_comment_content" %>
+          <%= f.submit '送信' %>
+        <% end %>
+      </div>
+        
     </div>
   </div>
 </div>

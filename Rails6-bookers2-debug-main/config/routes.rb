@@ -4,13 +4,17 @@ Rails.application.routes.draw do
   root :to =>"homes#top"
   get "home/about"=>"homes#about"
 
-  resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
+  resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
+    # いいね機能
+    resource :favorites, only: [:create, :destroy]
+    # コメント機能
+    resources :book_comments, only: [:create, :destroy]
+  end
+
   devise_for :users
   resources :users, only: [:index,:show,:edit,:update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
 
-  # いいね機能
-  post '/favorites/:book_id', to: 'favorites#create'
-  delete '/favorites/:book_id', to: 'favorites#destroy'
 
 end

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.search("name", params[:str], params[:type])
     @book = Book.new
   end
 

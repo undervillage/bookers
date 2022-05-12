@@ -11,8 +11,13 @@
   <body>
     <%= render 'layouts/header' %>
       <main>
-        <%= yield %>
         <p id="notice"><%= notice %></p>
+        <div class="row justify-content-center">
+          <div>
+            <%= render 'layouts/search_bar' %>
+          </div>
+        </div>
+        <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
   </body>

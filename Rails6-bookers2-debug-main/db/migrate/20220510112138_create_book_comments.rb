@@ -1,4 +1,4 @@
-class CreateBookComments < ActiveRecord::Migration[6.1]
+class CreateBookComments < ActiveRecord::Migration[6.0]
   def change
     create_table :book_comments do |t|
       t.references :user, foreign_key: true

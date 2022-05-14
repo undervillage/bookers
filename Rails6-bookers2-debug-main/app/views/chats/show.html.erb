@@ -1,0 +1,16 @@
+<h1 "data-user="<%= current_user.id %>"><%= @user.name%>さんとのチャット</h1>
+
+<div class="message" style="width: 400px;">
+  <% @chats.each do |chat| %>
+    <% if chat.speaker_id == current_user.id %>
+      <p style="text-align: right;"><%= chat.message %></p>
+    <% else %>
+      <p style="text-align: left;"><%= chat.message %></p>
+    <% end %>
+  <% end %>
+</div>
+<%= form_with url: chats_path, method: :post, remote: true do |f| %>
+  <%= f.text_field :message, maxlength: 140 %>
+  <%= f.hidden_field :speaker_id, :value => current_user.id %>
+  <%= f.hidden_field :replyer_id, :value => @user.id %>
+<% end %>

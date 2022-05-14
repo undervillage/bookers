@@ -3,13 +3,25 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    unless ViewCount.find_by(user_id: current_user.id, book_id: @book.id)
+      current_user.view_counts.create(book_id: @book.id)
+    end
+
     @new_book = Book.new
     @book_comments = @book.book_comments
     @book_comment = BookComment.new
   end
 
   def index
-    @books = Book.search("title", params[:str], params[:type])
+    books_list = Book.search("title", params[:str], params[:type])
+
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = books_list.all.sort {|a,b|
+        b.favorites.where(created_at: from...to).size <=>
+        a.favorites.where(created_at: from...to).size
+    }
+      
     @book = Book.new
   end
 

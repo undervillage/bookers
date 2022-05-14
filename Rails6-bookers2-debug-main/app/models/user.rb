@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :followings, through: :follower, source: :followed
   has_many :followers, through: :followed, source: :follower
 
+  has_many :chats
+  has_many :view_counts, dependent: :destroy
+  
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
  

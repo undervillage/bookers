@@ -1,0 +1,29 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+$border-color: #666;
+
+table {
+  border:1px solid $border-color;
+  border-collapse: collapse;
+
+  th,
+  td {
+      border:1px solid $border-color;
+      padding: 5px 8px;
+  }
+
+  th {
+      background:#dcdcdc;
+  }
+
+  .head {
+      width:20%;
+  }
+}
+
+.text {
+  &__title {
+    color: red;
+  }
+}

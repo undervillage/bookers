@@ -1,0 +1,17 @@
+h1
+  | 商品一覧
+table[border="1"]
+  thead
+    tr
+      th
+        | 商品名
+      th
+        | 金額
+  tbody
+    - if @products.present?
+      - @products.each do |product|
+        tr
+          td.text__title
+            = product.title
+          td
+            = product.price
